@@ -140,7 +140,13 @@ int servicesCount;
     self.onScanFound(device, advertisementData, RSSI);
 }
 
--(void) centralManagerDidUpdateState:(CBCentralManager*)central {}
+
+-(void) centralManagerDidUpdateState:(CBCentralManager*)central {
+    // printf("%d", central.state);
+   if(central.state == CBManagerStatePoweredOn )   {
+       [self startScan];
+   }
+}
 
 -(void) centralManager:(CBCentralManager*)central didConnectPeripheral:(CBPeripheral*)device {
     [device discoverServices:nil];
